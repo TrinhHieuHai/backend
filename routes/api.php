@@ -24,8 +24,10 @@ Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 
 Route::get('getCategory',[FrontendController::class,'category']);
+Route::get('getCategoryHome',[FrontendController::class,'categoryHome']);
 Route::get('fetchproducts/{slug}',[FrontendController::class,'product']);
 Route::get('allproduct',[FrontendController::class,'allproduct']);
+Route::get('allproductother',[FrontendController::class,'allproductother']);
 
 Route::get('viewproductdetail/{category_slug}/{product_slug}',[FrontendController::class,'viewproduct']);
 

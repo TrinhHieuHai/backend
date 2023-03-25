@@ -7,13 +7,21 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Catch_;
-
+use Illuminate\Support\Facades\DB;
 class FrontendController extends Controller
 {
     //
     public function category()
     {
         $category = Category::where('status','0')->get();
+        return response()->json([
+            'status'=>200,
+            'category'=>$category
+        ]);
+    }
+    public function categoryHome()
+    {
+        $category = Category::where('status','0')->limit(8)->get();
         return response()->json([
             'status'=>200,
             'category'=>$category
@@ -85,7 +93,16 @@ class FrontendController extends Controller
     }
     public function allproduct()
     {
-        $products= Product::all();
+
+        $products= Product::limit(8)->orderBy(DB::raw('RAND()'))->get();
+        return response()->json([
+            'status'=>200,
+            'products'=>$products,
+        ]);
+    }
+    public function allproductother()
+    {
+        $products= Product::limit(3)->orderBy(DB::raw('RAND()'))->get();
         return response()->json([
             'status'=>200,
             'products'=>$products,
